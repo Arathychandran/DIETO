@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Dieto</title>
+
+  <!-- Favicons -->
+  <link href="logo.png" rel="icon">
+  <link href="logo.png" rel="apple-touch-icon">
+        
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);  /* Nice gradient background */
+    }
+
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent background */
+      padding: 20px;
+    }
+
+    .form {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #007bff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .tright {
+      text-align: center;
+    }
+
+    button, .movebtnsu {
+      padding: 12px 25px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover, .movebtnsu:hover {
+      background-color: #0056b3;
+      box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Align form icons properly */
+    .relative {
+      position: relative;
+    }
+
+    .relative i {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      color: #007bff;
+    }
+
+    .form-control + i {
+      margin-top: -35px;
+    }
+
+    .form-control::placeholder {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .form-control {
+      transition: all 0.3s ease;
+    }
+
+    .form-control:hover {
+      border-color: #007bff;
+    }
+
+    .form-container .form {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Customizing the dropdown */
+    select.form-control {
+      appearance: none;
+      background: white url('data:image/svg+xml;utf8,<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9l-7 7-7-7"></path></svg>') no-repeat right 10px center;
+      background-size: 12px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="form-container">
+    <form class="form" action="{{ url_for('views.add_goal') }}" method="POST">
+      <h2>Set Your Goals</h2>
+  
+      <div class="form-group">
+        <label for="goal_description">Goal Description:</label>
+        <div class="relative">
+          <input class="form-control" id="goal_description" name="goal_description" type="text" maxlength="1000" required placeholder="Describe your goal">
+          <i class="fa fa-calendar"></i>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="current_weight">Current Weight:</label>
+        <div class="relative">
+          <input class="form-control" id="current_weight" name="current_weight" type="text" maxlength="10" required placeholder="Enter your current weight in kg">
+          <i class="fa fa-balance-scale"></i>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="target_weight">Target Weight:</label>
+        <div class="relative">
+          <input class="form-control" id="target_weight" name="target_weight" type="text" maxlength="10" required placeholder="Enter your target weight in kg">
+          <i class="fa fa-bullseye"></i>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="food_preference">Food Preference:</label>
+        <div class="relative">
+          <select class="form-control" id="food_preference" name="food_preference" required>
+            <option value="">Select Veg, Non-Veg or Vegan</option>
+            <option value="veg">Veg</option>
+            <option value="non-veg">Non-Veg</option>
+            <option value="vegan">Vegan</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="sleep">Hours of Sleep:</label>
+        <div class="relative">
+          <input class="form-control" id="sleep" name="sleep" type="text" required placeholder="Enter average hours of sleep">
+          <i class="fa fa-moon"></i>
+        </div>
+      </div>
+  
+      <div class="tright">
+        <button class="btn-get-started scrollto" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>  
+
+</body>
+</html>

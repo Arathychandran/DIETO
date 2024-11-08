@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display All User Goals</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: grid;
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .output-box {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #aed7d7;
+            border-radius: 8px;
+            min-height: 120px;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #4e342e;
+        }
+        button {
+            margin: auto;
+            width: 40%;
+            padding: 12px;
+            background-color: #549890;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+            
+        }
+        button:hover {
+            background-color: #004d40;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 20px;
+            background-color: #fafafa;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 20px;
+            color: #343a40;
+        }
+        textarea {
+            height: 100px; /* You can adjust this height as needed */
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All User Goals</h1>
+        <button onclick="getAllUserGoals()">Display All User Goals</button>
+
+        <div id="outputBox" class="output-box"></div>
+
+        <label for="userId">Enter User ID:</label>
+        <input type="text" id="userId" placeholder="Enter user ID">
+
+        <label for="dietPlan">Set Diet:</label>
+        <textarea id="dietPlan" placeholder="Set Diet"></textarea>
+
+        <button onclick="setDiet()">Set Diet</button>
+    </div>
+
+    <script>
+        async function getAllUserGoals() {
+            const response = await fetch('/get_all_users');
+            const data = await response.json();
+
+            let output = '';
+            data.forEach(user => {
+                output += `
+                    <strong>User ID:</strong> ${user.user_id} <br>
+                    <strong>Goal Description:</strong> ${user.goal_description} <br><br>
+                `;
+            });
+            document.getElementById("outputBox").innerHTML = output;
+        }
+
+        async function setDiet() {
+            const userId = document.getElementById('userId').value;
+            const dietPlan = document.getElementById('dietPlan').value;
+            const response = await fetch('/set_diet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    diet_description: dietPlan
+                })
+            });
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</body>
+</html>

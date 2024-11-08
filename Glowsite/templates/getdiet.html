@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Goals</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ac7a4b981f.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: rgba(181, 246, 204, 0.498);
+        }
+    </style>
+</head>
+<body>
+    <header class="tracking-wide bg-white" style="background-color:rgba(169, 239, 193, 0.498);">
+        <nav class="flex justify-between mt-4">
+            <div class="text-xl"> 
+                <a href="#" class="ml-16 mr-4 hover:text-blue-800"><i class="fas fa-bars"></i></a>
+                <a href="#" class="hover:text-blue-800"><i class="fas fa-search"></i></a>
+            </div> 
+            <h1 class="text-2xl" style="font-size:70px;font-family:serif;color:rgb(63, 62, 62)">Dieto</h1>
+            <div class="text-xl"> 
+                <a href="{{ url_for('views.profile') }}" class="hover:text-blue-800"><i class="fas fa-user"></i></a>
+                <a href="#" class="mr-16 ml-4 hover:text-blue-800"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex flex-col items-center mt-8">
+        <h1 class="text-3xl font-semibold text-center">Diet Plan for User</h1>
+        <div class="bg-white p-20 rounded-lg shadow-lg mt-6">
+            <h2 class="text-2xl font-bold mb-4">Your Diet Plan</h2>
+            <pre class="text-gray-700">{{ diet_description }}</pre>
+
+            <h2 class="text-xl font-semibold mt-8">Progress Feedback</h2>
+            <textarea id="feedback" class="w-full mt-2 p-3 border rounded-lg" placeholder="Enter your feedback here..."></textarea>
+            <button onclick="submitFeedback()" class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-800">Submit Feedback</button>
+        
+        </div>
+    </main>
+</body>
+</html>
